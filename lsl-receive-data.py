@@ -32,17 +32,21 @@ print "channels" , streams[0].channel_count()
 # create a new inlet to read from the stream
 inlet = StreamInlet(streams[0])
 
-#signal_tmp = np.zeros(1)
-x=np.zeros(NWD)
+## init the x timescale
+x=np.zeros(NWD) # x is the x axis of the chart (timescale)
+
+## Baseline statistics to be used for baseline normalization
 baseline_mean = 0 
 baseline_std = 0
 
+## init the chart window
 f, ax = plt.subplots()
+
+
 def dc(signal, i):
     """ 
     Calculates the DC of a signal in the specified window 
-    - **parameters**, **types**, **return** and **return types**::
-    
+
     Args:
         signal (array): 
             the signal matrix.
@@ -102,7 +106,9 @@ def animate(i):
         ax.plot(x, y + sig, c='gray')
         ax.set_ylim([-2, 9])
         ax.set_xlim([x[0], x[NWD-1]])
-        
-ani = animation.FuncAnimation(f, animate, init_func = init, interval=1)
-plt.show()
+
+
+if __name__ == '__main__':
+    ani = animation.FuncAnimation(f, animate, init_func = init, interval=1)
+    plt.show()
 
