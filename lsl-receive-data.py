@@ -39,11 +39,27 @@ baseline_std = 0
 
 f, ax = plt.subplots()
 def dc(signal, i):
+    """ 
+    Calculates the DC of a signal in the specified window 
+    - **parameters**, **types**, **return** and **return types**::
+    
+    Args:
+        signal (array): 
+            the signal matrix.
+        
+        i (int): 
+            the frame number, used for dc remove based only on the beginning of
+            the recordings.
+        
+    Returns:
+        type (array): 
+            the signal matrix normalized
+    """
     global baseline_mean, baseline_std
     if i < 100:
         baseline_mean = np.mean(signal, axis=1, keepdims=True)
         baseline_std = np.std(signal, axis=1, keepdims=True)
-        
+        dc()
     return ((signal - baseline_mean) / baseline_std)/GAIN
 
 def init():  
