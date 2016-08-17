@@ -13,12 +13,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
+## Set te window of display e.g WND=100 is 100 samples per chaet
 NWD = 1000
+## Should the DC be substructed from the signal
 DC = True
+## divide the signal by gain
 GAIN = 4
+## buffer to read on each inlet pull
 BUFF = 30
 
-# first resolve an EEG stream on the lab network
+# First resolve an EEG stream on the lab network
 print("looking for an EEG stream...")
 streams = resolve_stream('type', 'EEG')
 print "strram name", streams[0].name()
